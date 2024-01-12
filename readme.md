@@ -1,0 +1,1 @@
+This is a Etcha-A-Sketch website created for the Odin Project.
