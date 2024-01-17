@@ -1,24 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8">
+        <meta charset="UTF-8"/>
         <title> Etch-A-Sketch</title>
-        <link href="./styles/styles.css" rel="stylesheet" type ="text/css"/>
-        <script src="./js/script.js" defer></script>  
-    </head>
+        <link rel="stylesheet" href="./styles/styles.css" />
+        <script src="./js/script.js" defer></script>
     <body>
-        <h1 class="etch-a-sketch">Etch-A-Sketch</h1>
-    <div class="buttonSelection">
-        <button class="changeBtn" id="Black">Black</button>
-        <button class="changeBtn" id="Gray">Gray</button>
-        <button class="changeBtn" id="RGB">RGB</button>
-    </div>
-    
-    <div class="container-wrapper">
-        <div class="container">
+        <div id="eas-area" class="container"></div>
+        <div id="slider-container">
+            <input type="range" min="1" max="100" value="16" class="slider" id="slider">
+            <p id="slider-value"></p>
         </div>
-    </div>
-    
+        </div>
 
     </body>
 </html>
