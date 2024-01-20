@@ -9,7 +9,7 @@ body{
 
 #eas-area {
     display: flex;
-    flex-wrap: wrap;;
+    flex-wrap: wrap;
     background-color: white;
     margin: 100px auto 0 auto;
 
@@ -21,7 +21,10 @@ body{
 }
 
 #slider-container {
-    margin: 0 auto;
+    margin: 0px auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 
 }
 
@@ -29,7 +32,7 @@ body{
     -webkit-appearance: none;
     appearance: none;
     height: 20px;
-    width: 30%;
+    width: 600px;
     background: rgba(168, 218, 187, 0.801);
     outline: none;
     opacity: 0.7;
@@ -64,5 +67,4 @@ body{
     height: 25px;
     background: rgb(116, 244, 248);
     cursor: pointer;
-    outline: none;
 }
