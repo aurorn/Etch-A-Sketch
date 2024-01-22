@@ -3,11 +3,15 @@
 const gridSize = 600;
 let cellsLength = 16;
 
+
+
 /* Const's for Etch a Sketch and Slider */
 const easArea = document.querySelector("#eas-area");
 const sliderContainer = document.querySelector("#slider-container");
 const slider = document.querySelector("#slider");
 const sliderValue = document.querySelector("#slider-value");
+const delSketchButton = document.querySelector("#del-btn");
+
 /* */
 sliderValue.textContent = `${slider.value} x ${slider.value} (Resolution)`;
 easArea.style.width = easArea.style.height = `${gridSize}px`;
@@ -15,12 +19,14 @@ easArea.style.width = easArea.style.height = `${gridSize}px`;
 /* */
 function createGridCells(cellsLength) {
     const numOfCells = (cellsLength * cellsLength);
-    const widthOrHeight = `${(gridSize / cellsLength) - 2}px`;
+    const widthOrHeight = `${(gridSize / cellsLength) }px`;
+
     for (let i = 0; i < numOfCells; i++) {
         const gridCell = document.createElement("div");
 
         gridCell.style.width = gridCell.style.height = widthOrHeight;
         gridCell.classList.add("cell");
+        gridCell.style.border = "none";
 
         easArea.appendChild(gridCell);
 
@@ -28,6 +34,7 @@ function createGridCells(cellsLength) {
 
     }
 }
+
 
 /* This is the function that the mouseover calls to set the grid cell to black */
 function setBgColor() {
@@ -41,6 +48,13 @@ function remGridCells () {
     }
 }
 
+function delSketch() {
+    remGridCells ();
+    createGridCells (16);
+}
+
+delSketchButton.addEventListener("click", delSketch);
+
 slider.oninput = function () {
     cellsLength = this.value;
     sliderValue.textContent = `${this.value} x ${this.value} (Resolution)`;
@@ -48,4 +62,5 @@ slider.oninput = function () {
     createGridCells (this.value);
 }
 
-createGridCells (16);
+
+createGridCells(16);
