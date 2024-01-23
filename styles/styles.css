@@ -81,13 +81,18 @@ body{
 
 button {
     height: auto;
-    width: 100px;
-    font-size: 15px;
+    width: 144px;
+    font-size: 20px;
     border-style: solid;
-    border-radius: 5px;
+    border-radius: 2px;
     border-color: transparent;
     display: flex;
     flex: 1;
     justify-content: center;
+    background-color: rgb(120, 245, 115);
 
+}
+
+button:hover {
+    background-color: rgb(97, 199, 94);
 }
