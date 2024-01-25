@@ -1,16 +1,36 @@
-/* Size of the Grid */
-
 const gridSize = 600;
 let cellsLength = 16;
 
+const origColor = '#000000'
+const origMode = 'black'
+
+let currentColor = origColor
+let currentMode = origMode
+
+function setColor(newColor) {
+    activateBtn(newColor)
+    currentMode = newColor
+}
+
+const rgbBtn = document.querySelector("#rgb-btn");
+const original = document.querySelector("#black-btn");
+const eraser = document.querySelector("#eraser-btn");
+
+original.onclick = () => setColor('black')
+rgbBtn.onclick = () => setColor('rainbow')
+eraser.onclick = () => setColor('eraser')
 
 
-/* Const's for Etch a Sketch and Slider */
+
 const easArea = document.querySelector("#eas-area");
 const sliderContainer = document.querySelector("#slider-container");
 const slider = document.querySelector("#slider");
 const sliderValue = document.querySelector("#slider-value");
-const delSketchButton = document.querySelector("#del-btn");
+
+let mouseDown = false
+document.body.onmousedown = () => (mouseDown = true)
+document.body.onmouseup = () => (mouseDown = false)
+
 
 /* */
 sliderValue.textContent = `${slider.value} x ${slider.value} (Resolution)`;
@@ -20,26 +40,50 @@ easArea.style.width = easArea.style.height = `${gridSize}px`;
 function createGridCells(cellsLength) {
     const numOfCells = (cellsLength * cellsLength);
     const widthOrHeight = `${(gridSize / cellsLength) }px`;
-
     for (let i = 0; i < numOfCells; i++) {
         const gridCell = document.createElement("div");
-
         gridCell.style.width = gridCell.style.height = widthOrHeight;
         gridCell.classList.add("cell");
-        gridCell.style.border = "none";
-
         easArea.appendChild(gridCell);
-
-        gridCell.addEventListener("mouseover", setBgColor);
-
+        gridCell.addEventListener('mouseover', setBgColor);
+        gridCell.addEventListener('mousedown', setBgColor);
     }
 }
 
 
-/* This is the function that the mouseover calls to set the grid cell to black */
-function setBgColor() {
-    this.style.backgroundColor = "black";
+/* This sets what color will be when the mode is set */
+function setBgColor(e) {
+    
+    if (e.type === 'mouseover' && !mouseDown) return
+    if (currentMode === 'rainbow') {
+        const randomR = Math.floor(Math.random() * 256)
+        const randomG = Math.floor(Math.random() * 256)
+        const randomB = Math.floor(Math.random() * 256)
+        this.style.backgroundColor = `rgb(${randomR}, ${randomG}, ${randomB})`
+    } else if (currentMode === 'black') {
+        this.style.backgroundColor = currentColor
+    } else if (currentMode === 'eraser') {
+        this.style.backgroundColor = '#FFFFFF'
+  }
 }
+
+function activateBtn(newColor) {
+    if (currentMode === 'rainbow') {
+      rgbBtn.classList.remove('active')
+    } else if (currentMode === 'black') {
+      original.classList.remove('active')
+    } else if (currentMode === 'eraser') {
+      eraser.classList.remove('active')
+    }
+  
+    if (newColor === 'rainbow') {
+      rgbBtn.classList.add('active')
+    } else if (newColor === 'black') {
+      original.classList.add('active')
+    } else if (newColor === 'eraser') {
+      eraser.classList.add('active')
+    }
+  }
 
 /* Function to be called that deletes the Etch-A-Sketch */
 function remGridCells () {
@@ -48,12 +92,15 @@ function remGridCells () {
     }
 }
 
+const delSketchBtn = document.querySelector("#del-btn");
+delSketchBtn.addEventListener("click", delSketch);
+
 function delSketch() {
     remGridCells ();
     createGridCells (16);
 }
 
-delSketchButton.addEventListener("click", delSketch);
+
 
 slider.oninput = function () {
     cellsLength = this.value;
