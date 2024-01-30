@@ -19,22 +19,21 @@ original.onclick = () => setColor('black');
 const eraser = document.querySelector("#eraser-btn");
 eraser.onclick = () => setColor('eraser');
 
-
 const easArea = document.querySelector("#eas-area");
 const sliderContainer = document.querySelector("#slider-container");
 const slider = document.querySelector("#slider");
 const sliderValue = document.querySelector("#slider-value");
 
 let mouseDown = false;
-document.body.onmousedown = () => (mouseDown = true);
-document.body.onmouseup = () => (mouseDown = false);
+
+document.body.addEventListener("mousedown", () => (mouseDown = true))
+document.body.addEventListener("mouseup", () => (mouseDown = false))
 
 
-/* */
 sliderValue.textContent = `${slider.value} x ${slider.value} (Resolution)`;
 easArea.style.width = easArea.style.height = `${gridSize}px`;
 
-/* */
+/* This function creates the E-A-S */
 function createGridCells(cellsLength) {
     const numOfCells = (cellsLength * cellsLength);
     const widthOrHeight = `${(gridSize / cellsLength) }px`;
@@ -65,6 +64,7 @@ function setBgColor(e) {
   }
 }
 
+/* This function removes the current mode and activates the new one */
 function activateBtn(newColor) {
     if (currentMode === 'rainbow') {
       rgbBtn.classList.remove('active');
@@ -90,6 +90,7 @@ function remGridCells () {
     }
 }
 
+/* This allows the user to delete the sketch */
 const delSketchBtn = document.querySelector("#del-btn");
 delSketchBtn.addEventListener("click", delSketch);
 
@@ -97,7 +98,6 @@ function delSketch() {
     remGridCells ();
     createGridCells (16);
 }
-
 
 
 slider.oninput = function () {
