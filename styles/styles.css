@@ -66,6 +66,22 @@ body{
     opacity: 1;
 }
 
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: rgb(69, 70, 69);
+    
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: rgb(69, 70, 69);
+    
+}
+
 
 button {
     height: auto;
